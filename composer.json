@@ -1,0 +1,38 @@
+{
+    "name": "maks-oleksyuk/laravel-composer-scaffold",
+    "description": "A flexible Composer project scaffold builder.",
+    "license": "GPL-3.0-or-later",
+    "type": "composer-plugin",
+    "version": "1.0.x-dev",
+    "keywords": [
+        "laravel",
+        "plugin",
+        "scaffold"
+    ],
+    "require": {
+        "php": "^8.2",
+        "composer-plugin-api": "^2"
+    },
+    "require-dev": {
+        "composer/composer": "^2.7",
+        "ergebnis/composer-normalize": "^2.43",
+        "laravel/pint": "^1.17"
+    },
+    "autoload": {
+        "psr-4": {
+            "MaksOleksyuk\\Composer\\Plugin\\LaravelScaffold\\": ""
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        },
+        "class": "MaksOleksyuk\\Composer\\Plugin\\LaravelScaffold\\Plugin"
+    }
+}
