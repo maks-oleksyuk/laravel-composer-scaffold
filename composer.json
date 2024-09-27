@@ -16,7 +16,7 @@
     "require-dev": {
         "composer/composer": "^2.7",
         "ergebnis/composer-normalize": "^2.43",
-        "laravel/pint": "^1.17"
+        "laravel/pint": "^1.18"
     },
     "autoload": {
         "psr-4": {

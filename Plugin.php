@@ -6,42 +6,29 @@ namespace MaksOleksyuk\Composer\Plugin\LaravelScaffold;
 
 use Composer\Composer;
 use Composer\EventDispatcher\EventSubscriberInterface;
+use Composer\Installer\PackageEvent;
 use Composer\IO\IOInterface;
 use Composer\Plugin\Capability\CommandProvider as BaseCommandProvider;
 use Composer\Plugin\Capable;
 use Composer\Plugin\PluginInterface;
-use Composer\Script\Event;
-use Composer\Script\ScriptEvents;
+use Composer\Installer\PackageEvents;
 
 final class Plugin implements Capable, EventSubscriberInterface, PluginInterface
 {
-
     protected Composer $composer;
-
     protected IOInterface $io;
+    protected Handler $handler;
 
-    /**
-     * {@inheritdoc}
-     */
     public function activate(Composer $composer, IOInterface $io): void
     {
         $this->composer = $composer;
         $this->io = $io;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function deactivate(Composer $composer, IOInterface $io): void {}
 
-    /**
-     * {@inheritdoc}
-     */
     public function uninstall(Composer $composer, IOInterface $io): void {}
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCapabilities(): array
     {
         return [
@@ -49,20 +36,27 @@ final class Plugin implements Capable, EventSubscriberInterface, PluginInterface
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [
-            ScriptEvents::POST_AUTOLOAD_DUMP => 'postInstall',
+            PackageEvents::POST_PACKAGE_INSTALL => 'postPackage',
         ];
     }
 
-    public function postInstall(Event $event): void
+    public function postPackage(PackageEvent $event): void
     {
-        $handler = new Handler($this->composer, $this->io);
-        $handler->scaffold();
+        $operation = $event->getOperation();
+        $package = $operation->getOperationType() === 'update'
+            ? $operation->getTargetPackage()
+            : $operation->getPackage();
+
+        if ($package->getName() === 'laravel/framework') {
+            $this->handler()->scaffold();
+        }
     }
 
+    protected function handler(): Handler
+    {
+        return $this->handler ??= new Handler($this->composer, $this->io);
+    }
 }

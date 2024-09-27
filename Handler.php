@@ -41,7 +41,13 @@ final readonly class Handler
 
                 $destination = $rootPath.$file;
                 $url = "https://raw.githubusercontent.com/laravel/laravel/$version.x/$file";
-                $remoteFileContents = file_get_contents($url);
+
+                try {
+                    $remoteFileContents = file_get_contents($url);
+                } catch (\Exception) {
+                    $this->io->warning(" - File <bg=yellow;fg=black;options=bold>$file</> not found in laravel repository");
+                    continue;
+                }
 
                 if (! file_exists($destination)) {
                     $directory = dirname($destination);
@@ -53,6 +59,7 @@ final readonly class Handler
                 if (! file_exists($destination)) {
                     file_put_contents($destination, $remoteFileContents);
                     $this->io->write(" - Download <fg=green>$file</> from <fg=green>laravel/$version.x/$file</>");
+                    continue;
                 }
 
                 $localFileContents = file_get_contents($destination);
