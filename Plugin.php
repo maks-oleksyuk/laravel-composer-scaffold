@@ -7,16 +7,18 @@ namespace MaksOleksyuk\Composer\Plugin\LaravelScaffold;
 use Composer\Composer;
 use Composer\EventDispatcher\EventSubscriberInterface;
 use Composer\Installer\PackageEvent;
+use Composer\Installer\PackageEvents;
 use Composer\IO\IOInterface;
 use Composer\Plugin\Capability\CommandProvider as BaseCommandProvider;
 use Composer\Plugin\Capable;
 use Composer\Plugin\PluginInterface;
-use Composer\Installer\PackageEvents;
 
 final class Plugin implements Capable, EventSubscriberInterface, PluginInterface
 {
     protected Composer $composer;
+
     protected IOInterface $io;
+
     protected Handler $handler;
 
     public function activate(Composer $composer, IOInterface $io): void

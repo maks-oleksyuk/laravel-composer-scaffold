@@ -1,6 +1,6 @@
 {
     "name": "maks-oleksyuk/laravel-composer-scaffold",
-    "description": "A flexible Composer project scaffold builder.",
+    "description": "A flexible Composer scaffold builder for Laravel project.",
     "license": "GPL-3.0-or-later",
     "type": "composer-plugin",
     "version": "1.0.x-dev",
