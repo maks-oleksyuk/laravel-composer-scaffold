@@ -1,0 +1,46 @@
+name: 🔄 CI
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+    paths-ignore:
+      - README.md
+      - LICENSE.md
+  pull_request:
+    branches:
+      - main
+      - dev
+    paths-ignore:
+      - README.md
+      - LICENSE.md
+
+  # Allows to run this workflow manually from the Actions tab.
+  workflow_dispatch:
+
+jobs:
+  cleanup:
+    name: 🧹 Clean up GitHub repo
+    runs-on: ubuntu-latest
+    permissions: write-all
+    if: github.event_name != 'pull_request'
+
+    steps:
+      - name: 🗑 Delete workflow runs
+        uses: Mattraks/delete-workflow-runs@v2
+        with:
+          retain_days: 7
+          keep_minimum_runs: 1
+          delete_workflow_pattern: ci.yml
+
+  lint:
+    name: 🪄 Lint | Pint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🛎 Checkout
+        uses: actions/checkout@v4
+
+      - name: Laravel Pint
+        uses: aglipanci/laravel-pint-action@latest
