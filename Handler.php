@@ -12,6 +12,7 @@ final class Handler
     protected array $files = [
         'artisan',
         '.editorconfig',
+        'bootstrap/cache/.gitignore',
         'public/.htaccess',
         'public/index.php',
         'public/favicon.ico',
@@ -54,8 +55,8 @@ final class Handler
         }
 
         $version = (int) strtok($laravelFrameworkPackage->getVersion(), '.');
-        $this->io->write('Scaffolding files from <fg=yellow>laravel/laravel</>:');
         $rootPath = $this->composer->getConfig()->get('vendor-dir').'/../';
+        $this->io->write('Scaffolding files from <fg=yellow>laravel/laravel</>:');
 
         foreach ($this->files as $file) {
             $destination = $rootPath.$file;
@@ -85,9 +86,7 @@ final class Handler
 
             $localFileContents = file_get_contents($destination);
 
-            if ($localFileContents === $remoteFileContents) {
-                $this->io->write(" - Skip     <fg=green>$file</> from <fg=green>laravel/$version.x/$file</>");
-            } else {
+            if ($localFileContents !== $remoteFileContents) {
                 file_put_contents($destination, $remoteFileContents);
                 $this->io->write(" - Update   <fg=green>$file</> from <fg=green>laravel/$version.x/$file</>");
             }
