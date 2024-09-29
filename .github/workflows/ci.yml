@@ -35,12 +35,12 @@ jobs:
           delete_workflow_pattern: ci.yml
 
   lint:
-    name: 🪄 Lint | Pint
+    name: 🪄 Lint | 🧽 Pint
     runs-on: ubuntu-latest
 
     steps:
       - name: 🛎 Checkout
         uses: actions/checkout@v4
 
-      - name: Laravel Pint
+      - name: 🧽 Laravel Pint
         uses: aglipanci/laravel-pint-action@latest

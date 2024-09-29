@@ -9,13 +9,19 @@
         "plugin",
         "scaffold"
     ],
+    "authors": [
+        {
+            "name": "Maks Oleksyuk",
+            "email": "maksym.oleksyuk@gmail.com"
+        }
+    ],
+    "homepage": "https://github.com/maks-oleksyuk/laravel-composer-scaffold",
     "require": {
         "php": "^8.2",
         "composer-plugin-api": "^2"
     },
     "require-dev": {
         "composer/composer": "^2.7",
-        "ergebnis/composer-normalize": "^2.43",
         "laravel/pint": "^1.18"
     },
     "autoload": {
@@ -24,9 +30,6 @@
         }
     },
     "config": {
-        "allow-plugins": {
-            "ergebnis/composer-normalize": true
-        },
         "sort-packages": true
     },
     "extra": {

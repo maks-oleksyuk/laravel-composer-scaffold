@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/maks-oleksyuk/laravel-composer-scaffold/actions/workflows/ci.yml/badge.svg?branch=main)](//github.com/maks-oleksyuk/laravel-composer-scaffold/actions/workflows/ci.yml)
 [![Laravel version](https://img.shields.io/badge/10%20%7C%2011-ff2d20?logo=laravel&label=Laravel&logoColor=fff)](//laravel.com 'Laravel')
+[![Packagist Downloads](https://img.shields.io/packagist/dt/maks-oleksyuk/laravel-composer-scaffold?logo=packagist&label=Downloads&color=f28d1A&logoColor=fff)](//packagist.org/packages/maks-oleksyuk/laravel-composer-scaffold 'Packagist Downloads')
 
 This project provides a Composer plugin that makes the Laravel Composer package work correctly in a Composer project.
 
@@ -34,6 +35,7 @@ By default, the plugin does not require any additional settings, so it will only
 ```text
 artisan
 .editorconfig
+bootstrap/cache/.gitignore
 public/.htaccess
 public/index.php
 public/favicon.ico
@@ -53,17 +55,15 @@ storage/logs/.gitignore
 However, you can overwrite these settings by specifying the desired settings in the `composer.json` file:
 
 ```json
-{
-	"extra": {
-        "laravel-scaffold": {
-            "files": [
-                "artisan",
-                ".editorconfig",
-                "public/.htaccess",
-                "public/index.php",
-                "public/robots.txt"
-            ]
-        }
+"extra": {
+    "laravel-scaffold": {
+        "files": [
+            "artisan",
+            ".editorconfig",
+            "public/.htaccess",
+            "public/index.php",
+            "public/robots.txt"
+        ]
     }
 }
 ```

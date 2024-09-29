@@ -12,6 +12,8 @@ use Composer\IO\IOInterface;
 use Composer\Plugin\Capability\CommandProvider as BaseCommandProvider;
 use Composer\Plugin\Capable;
 use Composer\Plugin\PluginInterface;
+use Composer\Script\Event;
+use Composer\Script\ScriptEvents;
 
 final class Plugin implements Capable, EventSubscriberInterface, PluginInterface
 {
@@ -41,8 +43,15 @@ final class Plugin implements Capable, EventSubscriberInterface, PluginInterface
     public static function getSubscribedEvents(): array
     {
         return [
+            ScriptEvents::POST_UPDATE_CMD => 'postCmd',
+            ScriptEvents::POST_INSTALL_CMD => 'postCmd',
             PackageEvents::POST_PACKAGE_INSTALL => 'postPackage',
         ];
+    }
+
+    public function postCmd(Event $event): void
+    {
+        $this->handler()->scaffold();
     }
 
     public function postPackage(PackageEvent $event): void
