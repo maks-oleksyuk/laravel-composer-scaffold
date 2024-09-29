@@ -3,7 +3,7 @@
     "description": "A flexible Composer scaffold builder for Laravel project.",
     "license": "GPL-3.0-or-later",
     "type": "composer-plugin",
-    "version": "1.0.x-dev",
+    "version": "0.0.1",
     "keywords": [
         "laravel",
         "plugin",
